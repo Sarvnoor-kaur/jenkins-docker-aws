@@ -49,12 +49,8 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQubeScanner 'SonarScanner'   // make sure configured in Jenkins Global Tools
-    }
-
     environment {
-        SONAR_TOKEN = credentials('sonar-token') // store in Jenkins credentials
+        SONAR_TOKEN = credentials('sonar-token')
     }
 
     stages {
@@ -93,26 +89,20 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                script {
-                    sh "docker build -t shophub-app ."
-                }
+                sh "docker build -t shophub-app ."
             }
         }
 
         stage('Stop Old Container') {
             steps {
-                script {
-                    sh "docker stop shophub || true"
-                    sh "docker rm shophub || true"
-                }
+                sh "docker stop shophub || true"
+                sh "docker rm shophub || true"
             }
         }
 
         stage('Run Container') {
             steps {
-                script {
-                    sh "docker run -d --name shophub -p 80:80 shophub-app"
-                }
+                sh "docker run -d --name shophub -p 80:80 shophub-app"
             }
         }
     }
