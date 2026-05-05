@@ -69,8 +69,8 @@ pipeline {
                         sonar-scanner \
                         -Dsonar.projectKey=shophub \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://<SONARQUBE-EC2-IP>:9000 \
-                        -Dsonar.login=${SONAR_TOKEN}
+                        -Dsonar.host.url=http://43.205.242.218:9000 \
+                        -Dsonar.login=$SONAR_TOKEN
                         """
                     }
                 }
